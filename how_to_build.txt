@@ -1,0 +1,29 @@
+export username="hirocaster"
+export useremail="hohtsuka@gmail.com"
+export loginuser="hirocaster"
+
+adduser -D $loginuser
+addgroup $loginuser abuild
+echo "$loginuser ALL=(ALL) ALL" >> /etc/sudoers
+
+mkdir -p /var/cache/distfiles
+chgrp abuild /var/cache/distfiles
+chmod g+w /var/cache/distfiles
+
+echo "PACKAGER='$username <$useremail>'" >> /etc/abuild.conf
+
+apk add imagemagick-dev gtk+-dev py-gtk-dev qt-dev libtool lcms2-dev
+
+passwd $loginuser
+
+su $loginuser
+cd
+
+git config --global user.name '$username'
+git config --global user.email '$useremail'
+
+abuild-keygen -a -i
+
+git clone https://github.com/hirocaster/patched-zbar.git zbar
+cd zbar
+abuild checksum && abuild
