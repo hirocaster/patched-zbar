@@ -9,7 +9,7 @@ depends="py-gobject"
 makedepends="imagemagick-dev gtk+-dev py-gtk-dev qt-dev libtool lcms2-dev"
 install=""
 subpackages="$pkgname-dev $pkgname-doc"
-source="https://sourceforge.net/projects/zbar/files/zbar/$pkgver/zbar-$pkgver.tar.bz2"
+source="https://github.com/hirocaster/patched-zbar/raw/master/zbar-0.10.tar.bz2"
 
 builddir="$srcdir"/zbar-$pkgver
 build() {
